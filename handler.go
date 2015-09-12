@@ -29,6 +29,12 @@ func (h *baseHandler) On(event string, f interface{}) error {
 	return nil
 }
 
+func (h *baseHandler) Unbind(event string) {
+	if _, found := h.events[event]; found {
+		delete(h.events, event)
+	}
+}
+
 type socketHandler struct {
 	*baseHandler
 	acks   map[int]*caller
